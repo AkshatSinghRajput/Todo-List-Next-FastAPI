@@ -1,15 +1,22 @@
 from fastapi import APIRouter, Request
 from config.database import connect_to_mongodb
+from schemas.todo import todoEntity, todoListEntity
 
-connection =  connect_to_mongodb()
+# Connecting to mongodb 
+connection = connect_to_mongodb()
 
 todo = APIRouter()
 
+# Getting All Notes
 @todo.get("/")
 def get_todos():
     try:
+        # Getting All items of todo list from database
         todo_data = connection.ArticleSite.todos.find({})
-        return {"todos":todo_data}
-    except(e):
+        # Converting the data to todoListEntitu
+        data = todoListEntity(todo_data)
+        # Sending the data as response
+        return {"data": data}
+    except Exception as e:
         print(e)
         return None

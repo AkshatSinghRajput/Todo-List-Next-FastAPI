@@ -1,0 +1,3 @@
+# Convert this file to .env and update the variables value
+
+MONGO_URI=
