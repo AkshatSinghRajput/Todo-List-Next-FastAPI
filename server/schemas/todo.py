@@ -1,6 +1,6 @@
 def todoEntity(item) -> dict:
     return {
-        "id": str(item["_id"]),
+        "id": str(item["id"]),
         "title": item["title"],
         "description": item["description"],
         "important": item["important"],
