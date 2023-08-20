@@ -9,3 +9,8 @@ class Todo(BaseModel):
 
 class Todo_list(BaseModel):
     data: list[Todo] | list[None]
+
+class Todo_request(BaseModel):
+    title: str
+    description: str
+    important: bool

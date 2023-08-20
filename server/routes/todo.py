@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request, HTTPException, Body
 from config.database import connect_to_mongodb
 from schemas.todo import todoEntity, todoListEntity
-from models.todo import Todo, Todo_list
+from models.todo import Todo, Todo_list, Todo_request
 from uuid import uuid4
 
 # Connecting to mongodb
@@ -34,7 +34,8 @@ async def get_todo_byid(id: str) -> Todo | None:
 
 # Creating New Todo
 @todo.post("/api/todos")
-async def create_todo(todo_data: dict):
+async def create_todo(todo_data: Todo_request):
+    todo_data = todo_data.dict()
     todo = {
         "id": uuid4(),
         "title": todo_data["title"],
@@ -43,3 +44,4 @@ async def create_todo(todo_data: dict):
         "completed": True,
     }
     collection.insert_one(todoEntity(todo))
+    return todo
