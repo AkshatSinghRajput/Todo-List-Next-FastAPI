@@ -5,9 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 #  App Object
 app = FastAPI()
 
-origins = [
-    'http://localhost:3000'
-]
+origins = ["http://localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,5 +15,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(todo)
-
+app.include_router(todo, tags=["TODO"], prefix="/api/v1/todo")
